@@ -11,7 +11,7 @@ const Categories = () => {
   
     const handleStartGame = () => {
       handleChangeCategoryNumbers(numberOfCategories + 1);
-      navigate(`/question`);
+      navigate(`/questions`);
     };
     
   return (
@@ -19,7 +19,11 @@ const Categories = () => {
         <CategoryHeader>Questions Category</CategoryHeader>
         <GridContainer>
             {[{ id: 0, name: "Random" }, ...categories].map((item) => (
-                <Item onClick={() => handleChangeCategory(item)}>
+                <Item 
+                    onClick={() => handleChangeCategory(item)}
+                    style={{
+                        background: category.id === item.id ? "#FFFFFF" : "",
+                      }}>
                     {item.name}
                 </Item> 
             ))}
