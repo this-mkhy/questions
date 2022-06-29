@@ -2,7 +2,7 @@ import ReactECharts from "echarts-for-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { ScoreContainer, PlayerName, TimeContainer, Button, BtnContainer } from './ScoreElements'
+import { ScoreContainer, PlayerName, ChartContainer, Chart, TimeContainer, Time, TimeSeconds, Button, BtnContainer } from './ScoreElements'
 
 const Score = ({ time, score, answers, playerName, handleStartNewGame }) => {
   const navigate = useNavigate();
@@ -82,39 +82,66 @@ const Score = ({ time, score, answers, playerName, handleStartNewGame }) => {
     handleStartNewGame();
     navigate("/");
   };
+  const timeInSeconds = Math.trunc(
+    time?.reduce((prev, curr) => prev + curr)
+  )
+  const timeInMins = Math.floor(timeInSeconds / 60) ;
+  // if(timeInSeconds<60){
+  //   timeInMins = timeInMins
+  // }
 
   return (
     <ScoreContainer>
       <PlayerName>{playerName}</PlayerName>
-        <TimeContainer>
-          Time
-          <span> 
-            {Math.trunc(
-                time?.reduce((prev, curr) => prev + curr)
-            )} {" "}Seconds 
-          </span>
-        </TimeContainer> 
-        <ReactECharts
-          option={pie}
-          notMerge={true}
-          lazyUpdate={true}
-          theme={"theme_name"}
-        /> 
-        <ReactECharts
-          option={bar}
-          notMerge={true}
-          lazyUpdate={true}
-          theme={"theme_name"}
-        /> 
-        <ReactECharts
-          option={line}
-          notMerge={true}
-          lazyUpdate={true}
-          theme={"theme_name"}
-        /> 
+      <ChartContainer>
+        <Chart>
+          
+          <TimeContainer>
+            <Time>Time</Time>
+
+            <TimeSeconds> 
+              {timeInSeconds} {" "}Seconds 
+            </TimeSeconds>
+            <TimeSeconds> 
+              {timeInMins} {" "}Mins and {timeInSeconds-(timeInMins*60)} seconds
+            </TimeSeconds>
+          </TimeContainer> 
+          
+        </Chart>
+
+        
+        <Chart>
+          <ReactECharts
+            option={pie}
+            notMerge={true}
+            lazyUpdate={true}
+            theme={"theme_name"}
+          /> 
+        
+        </Chart>
+        
+        <Chart>
+          <ReactECharts
+            option={bar}
+            notMerge={true}
+            lazyUpdate={true}
+            theme={"theme_name"}
+          /> 
+        
+        </Chart>
+        
+        <Chart>
+          <ReactECharts
+            option={line}
+            notMerge={true}
+            lazyUpdate={true}
+            theme={"theme_name"}
+          /> 
+        
+        </Chart>
+      </ChartContainer>
       <BtnContainer>
         <Button onClick={handleClick}>New Game</Button>
-
       </BtnContainer>
     </ScoreContainer>
 
