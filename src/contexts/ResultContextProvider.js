@@ -82,12 +82,24 @@ export const ResultContextProvider = ({ children }) => {
       return arr;
     };
 
+    const handleStartNewGame = () => {
+      setPlayerName("");
+      setDifficulty("");
+      setCategory("");
+      setCategories([]);
+      setNumberOfCategories(0);
+      setNumberOfQuestions(0);
+      setAnswers({});
+      setScore();
+      setTime([]);
+    };
+    
   // send states and function through the context to anywhere in the react app
   return (
     <ResultContext.Provider value={{ playerName, setPlayerName, difficulty, setDifficulty, category, setCategory, categories, setCategories, numberOfCategories, 
         setNumberOfCategories, handleChangeDifficulty, handleChangeCategory, handleChangePlayerName, handleChangeCategoryNumbers,
         time, numberOfQuestions, answers, score, handleChangeNumberOfQuestions, handleChangeTime, handleChangeScore, handleChangeAnswers, handleChangeCategories,
-        questionTime, shuffleQuestion }}>
+        questionTime, shuffleQuestion, handleStartNewGame }}>
       
       {children}
     </ResultContext.Provider>

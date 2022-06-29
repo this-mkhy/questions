@@ -94,10 +94,10 @@ export default function Question() {
             });
         }
 
-        if (numberOfQuestions < 4) {
+        if (numberOfQuestions < 2) {
             setCurrentQuestion(questions[numberOfQuestions + 1]);
             handleChangeNumberOfQuestions(numberOfQuestions + 1);
-        } else if (numberOfCategories < 4) {
+        } else if (numberOfCategories < 2) {
             navigate("/categories");
             handleChangeNumberOfQuestions(0);
         } else {
